@@ -1,0 +1,22 @@
+{
+    "short_name": "Sextant JSONPath",
+    "name": "Sextant - High performance JSONPath for Swift",
+    "description": "Playground to run JSONPath queries executed by Sextant",
+    "icons": [
+        {
+            "src": "/public/icon192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/public/icon512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#000000",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#505c83"
+}

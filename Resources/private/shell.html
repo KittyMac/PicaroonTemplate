@@ -1,0 +1,367 @@
+#define PAMPHLET_PREPROCESSOR
+
+#include <../private/lib/ui/ui.all.html>
+
+#macro JSON_SELECT(STYLE)
+<select id="exampleJsonSelect" style="DEFAULT()STYLE">
+    OPTION(0,Goessner)
+    OPTION(1,Web App)
+    OPTION(2,GitHub Projects)
+    OPTION(3,Custom)
+</select>
+#endmacro
+
+
+#macro EXAMPLE0_PATHS_SELECT(STYLE)
+<select id="pathsSelect" style="DEFAULT()STYLE">
+    OPTION(0,The authors of all books)
+    OPTION(1,All authors and all titles (single))
+    OPTION(2,All authors and all titles (union))
+    OPTION(3,All things - both books and bicycles)
+    OPTION(4,The price of everything)
+    OPTION(5,The third book)
+    OPTION(6,The second to last book)
+    OPTION(7,The first two books)
+    OPTION(8,All books from index 0 until index 2)
+    OPTION(9,All books from index 1 until index 2)
+    OPTION(10,Last two books)
+    OPTION(11,Book number two from tail)
+    OPTION(12,All books with an ISBN number)
+    OPTION(13,All books in store cheaper than 10)
+    OPTION(14,All bargain books in store)
+    OPTION(15,All books matching regex)
+    OPTION(16,Give me every thing)
+    OPTION(17,The number of books)
+</select>
+#endmacro
+
+#macro EXAMPLE1_PATHS_SELECT(STYLE)
+<select id="pathsSelect" style="DEFAULT()STYLE">
+    OPTION(0,The names of all servlets)
+    OPTION(1,All cms servlets)
+    OPTION(2,All timeouts of all servlets)
+</select>
+#endmacro
+
+#macro EXAMPLE2_PATHS_SELECT(STYLE)
+<select id="pathsSelect" style="DEFAULT()STYLE">
+    OPTION(0,All repos)
+    OPTION(1,All repos which have commits)
+    OPTION(2,All repos whose name contains dash)
+</select>
+#endmacro
+
+#macro EXAMPLE3_PATHS_SELECT(STYLE)
+<select id="pathsSelect" style="DEFAULT()STYLE">
+    OPTION(0,None)
+</select>
+#endmacro
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <title>Sextant - High performance JSONPath for Swift!</title>
+    <link rel="manifest" href="/public/manifest.json">
+    <link rel="apple-touch-icon" sizes="192x192" href="/public/icon192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/public/icon512.png">
+    
+    #include <./shell.fonts.html>
+    
+    <script>
+        if (sessionStorage.getItem("Session-Id") == undefined) {
+            let sessionUUID = document.cookie.match(/SESSION_UUID=([A-Z0-9\-]*);?/);
+            if (sessionUUID != undefined && sessionUUID.length > 1) {
+                sessionStorage.setItem("Session-Id", sessionUUID[1]);
+            }
+        }
+    </script>
+        
+    <script src="script.combined.js"></script>
+    
+    <style>
+        h1 {
+            ROBOTO(2)
+        }
+        h2 {
+            ROBOTO(1.5)
+        }
+        h3 {
+            ROBOTO(1)
+        }
+        body {
+            MAIN_BACKGROUND();
+            VSCROLLING();
+            -webkit-text-size-adjust: none;
+        }
+        *:focus {
+            outline: none;
+        }
+    </style>
+    
+</head>
+<body>
+	<noscript>
+		<div style="position:fixed;display:flex;justify-content:center;align-items:center;width:100%;height:100%;padding:0px;margin:0px;overflow:hidden;">
+			<h1>This app requires Javascript to be enabled.</h1>
+		</div>
+	</noscript>
+            
+    ELEMENT(GROW()START()CLIPS()VSTACK(),
+        GITHUB("https://github.com/KittyMac/Sextant",#535457)
+    
+        ELEMENT(HSTACK()MINHEIGHT(5)PCTWIDTH(100)MARGIN(1,0,2,0),
+            LINK("https://github.com/KittyMac/Sextant",
+                IMAGE(SIZEALL(5,5)MARGIN(0,1,1,1),/public/icon192.png)
+            )
+            ELEMENT(VSTACK()GROW()MINHEIGHT(5),
+                HEADER2(Sextant)
+                TEXT(High performance JSONPath queries for Swift)
+            )
+        )
+    
+        ELEMENT(HSTACKREV()SHRINK()STRETCH()MARGIN(0,0,1.5,0)WRAP(),
+            ELEMENT(VSTACK()GROW()MINWIDTH(18)MARGIN(0.5,1,0,1)PCTFLEXBASIS(25),
+                ELEMENT(HSTACK()BETWEEN(),
+                    TEXT(Input JSONPath)
+                    ID_ELEMENT(pathsSelectContainer,,)
+                )
+                ELEMENT(STDSHADOW()MARGIN(0.5,0,0.5,0)BACKGROUND(255,255,255,1),
+                    ID_ELEMENT(pathEditor,GROW()ITEM_OUTLINE()CLIPS(),)
+                )
+                
+                ELEMENT(HSTACK()BETWEEN(),
+                    TEXT(Sextant Results)
+                    HSPACE()
+                )
+                ELEMENT(SHRINK()MINHEIGHT(10)STDSHADOW()MARGIN(0.5,0,0.5,0)BACKGROUND(255,255,255,1),
+                    ID_ELEMENT(resultsEditor,SHRINK()PCTWIDTH(100)ITEM_OUTLINE()CLIPS(),)
+                )
+                
+                ELEMENT(HSTACK()BETWEEN(),
+                    TEXT(Example Swift)
+                    HSPACE()
+                )
+                ELEMENT(GROW()MINHEIGHT(10)STDSHADOW()MARGIN(0.5,0,0,0)BACKGROUND(255,255,255,1),
+                    ID_ELEMENT(swiftEditor,SHRINK()PCTWIDTH(100)ITEM_OUTLINE()CLIPS(),)
+                )
+            )
+            ELEMENT(VSTACK()GROW()MINWIDTH(18)MARGIN(0.5,1,0,1)PCTFLEXBASIS(25),
+                ELEMENT(HSTACK()BETWEEN(),
+                    TEXT(Input JSON)
+                    JSON_SELECT()
+                )
+                ELEMENT(GROW()MINHEIGHT(10)STDSHADOW()MARGIN(0.5,0,0,0)BACKGROUND(255,255,255,1),
+                    ID_ELEMENT(jsonEditor,SHRINK()PCTWIDTH(100)ITEM_OUTLINE()CLIPS(),)
+                )
+            )
+        )
+        
+        ELEMENT(VSTACK()GROW()PCTWIDTH(100)MARGIN(2,0,2,0)LATO(1.0)FBLACK(),
+            ELEMENT(HSTACK()CENTER()MARGIN(0.5,0,0.5,0),
+                This web app was built using the following projects
+            )
+            ELEMENT(HSTACK()CENTER()MARGIN(0.5,0,0.25,0)WRAP(),
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Sextant",Sextant))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Spanker",Spanker))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Hitch",Hitch))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Flynn",Flynn))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Picaroon",Picaroon))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://github.com/KittyMac/Pamphlet",Pamphlet))
+            )
+            ELEMENT(HSTACK()CENTER()MARGIN(0.25,0,0.5,0)WRAP(),
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://codemirror.net/6/",CodeMirror6))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://www.swift.org",Swift))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://www.docker.com",Docker))
+                ELEMENT(MARGIN(0,1,0,1),LINK("https://ubuntu.com",Ubuntu))            
+            )
+        )
+    )
+        
+    ID_ELEMENT(alertsContainer,FULLSCREEN()ABSOLUTE()BACKGROUND(0,0,0,0.5)CENTER()CLIPS()HIDE(),)
+    
+    <script src="public/codemirror/editor.bundle.js"></script>
+    
+    <script>
+        
+        computeEmToPx();
+        initTimers();
+        
+        let jsonEditor = cm.CreateEditor("jsonEditor", cm.jsonSetup, true);
+        let pathEditor = cm.CreateEditor("pathEditor", cm.minimalSetup, true);
+        let resultsEditor = cm.CreateEditor("resultsEditor", cm.jsonSetup, false);
+        let swiftEditor = cm.CreateEditor("swiftEditor", cm.swiftSetup, false);
+        
+        function generateSwift(json, paths) {
+            // provide simple, copy paste example of what is being shown on the site to put
+            // into a project and run
+            
+            let minimalObj = JSON.parse(json)
+            let minimalJson = JSON.stringify(minimalObj)
+            
+            var code = "";
+            if (paths.length == 1) {
+                code = 
+`import Sextant
+
+let json = #"${minimalJson}"#
+if let results = json.query(values: "${paths[0]}") {
+  print(results)
+}`;
+            } else {
+                code = 
+`import Sextant
+
+let json = #"${minimalJson}"#
+if let results = json.query(values: ${JSON.stringify(paths)}) {
+  print(results)
+}`;
+            }
+            
+            swiftEditor.dispatch({
+                changes: {from: 0, to: swiftEditor.state.doc.length, insert: code}
+            });
+        }
+        
+        let lastPath = "";
+        let lastJson = "";
+        let lastPathsExample = -1;
+        function performQuery(json, path) {
+            if (lastJson == json && lastPath == path) {
+                return;
+            }
+            
+            try {
+                JSON.parse(json);
+            } catch {
+                return;
+            }
+            
+            let minimalObj = JSON.parse(json)
+            let minimalJson = JSON.stringify(minimalObj)
+            
+            let isExampleJson = false;
+            FOREACH(exampleJson,examples) {
+                if (JSON.stringify(exampleJson) == minimalJson && minimalJson != "{}") {
+                    isExampleJson = true;
+                }
+            }
+            
+            let pathsSelect = document.getElementById("pathsSelect");
+            let examplesSelect = document.getElementById("exampleJsonSelect");
+            if (isExampleJson) {
+                enableDiv(pathsSelect);
+            } else {
+                disableDiv(pathsSelect);
+                examplesSelect.value = 3;
+            }
+            
+            let args = {
+                json: minimalJson,
+                path: path
+            }
+            send(args, function(xhttp) {
+        		if (xhttp.status == 200) {
+                    
+                    lastJson = json;
+                    lastPath = path;
+                    
+                    var text = "";
+                    try {
+                        let resultJson = xhttp.responseText;
+                        let jsonObj = JSON.parse(resultJson);
+                        text = JSON.stringify(jsonObj, null, 2);
+                    } catch(error) {
+                        text = xhttp.responseText;
+                    }
+                    
+                    resultsEditor.dispatch({
+                        changes: {from: 0, to: resultsEditor.state.doc.length, insert: text}
+                    });
+                    
+                    generateSwift(minimalJson, lastPath.split("\n"));
+        		}
+            })
+        }
+        
+        function switchJson(jsonIndex, exampleIndex) {
+            jsonIndex = parseInt(jsonIndex);
+            exampleIndex = parseInt(exampleIndex);
+            
+            let jsonObj = examples[jsonIndex];
+            let jsonPretty = JSON.stringify(jsonObj, null, 2);
+            
+            exampleJsonSelect.value = jsonIndex;
+            
+            
+            jsonEditor.dispatch({
+                changes: {from: 0, to: jsonEditor.state.doc.length, insert: jsonPretty}
+            });
+            
+            let path = examplePaths[jsonIndex][exampleIndex];
+            pathEditor.dispatch({
+                changes: {from: 0, to: pathEditor.state.doc.length, insert: path}
+            });
+            
+            if (lastPathsExample != jsonIndex) {
+                lastPathsExample = jsonIndex;
+                
+                let examplePathsHtml = ``;
+                switch (jsonIndex) {
+                case 0:
+                    examplePathsHtml = `EXAMPLE0_PATHS_SELECT()`;
+                    break;
+                case 1:
+                    examplePathsHtml = `EXAMPLE1_PATHS_SELECT()`;
+                    break;
+                case 2:
+                    examplePathsHtml = `EXAMPLE2_PATHS_SELECT()`;
+                    break;
+                case 3:
+                    examplePathsHtml = `EXAMPLE3_PATHS_SELECT()`;
+                    break;
+                }
+                replaceHtml(pathsSelectContainer, examplePathsHtml);
+            
+                let pathsSelect = document.getElementById("pathsSelect");
+                if (pathsSelect != undefined) {
+                    pathsSelect.value = exampleIndex;
+                    document.getElementById("pathsSelect").onchange = function() {
+                        switchJson(exampleJsonSelect.value, pathsSelect.value);
+                    };
+                }
+            }
+            
+            performQuery(
+                jsonEditor.state.doc.toString(),
+                pathEditor.state.doc.toString()
+            );
+        }
+        exampleJsonSelect.onchange = function() {
+            switchJson(exampleJsonSelect.value, 0);
+        };
+        
+        addTimer(function() {
+            performQuery(
+                jsonEditor.state.doc.toString(),
+                pathEditor.state.doc.toString()
+            );
+        });
+        
+        // http://localhost:8080/sextant/?example=0&path=0
+        let params = new URLSearchParams(window.location.search);
+        let example = params.get("example") || 0;
+        let path = params.get("path") ||  0;
+        switchJson(example, path);
+                
+        function animate() {
+            Laba.update()
+            window.requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+    
+</body>
+</html>
