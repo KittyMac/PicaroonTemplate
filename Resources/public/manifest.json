@@ -1,7 +1,7 @@
 {
-    "short_name": "Sextant JSONPath",
-    "name": "Sextant - High performance JSONPath for Swift",
-    "description": "Playground to run JSONPath queries executed by Sextant",
+    "short_name": "Picaroon Template",
+    "name": "Picaroon Template",
+    "description": "Template to create web apps using Picaroon and other tools",
     "icons": [
         {
             "src": "/public/icon192.png",

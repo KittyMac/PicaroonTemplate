@@ -6,8 +6,14 @@ build: preprocess
 preprocess:
 	./meta/CombinedBuildPhases.sh
 
+figurehead:
+	mate ./.build/checkouts/Figurehead/Resources/
+
 update:
+	mkdir -p ./Sources/Pamphlet
 	swift package update
+	rm -rf ./Sources/Pamphlet
+	./meta/CombinedBuildPhases.sh
 
 clean:
 	rm -rf .build
