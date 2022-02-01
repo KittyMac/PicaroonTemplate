@@ -1,4 +1,5 @@
 SWIFT_BUILD_FLAGS=--configuration release
+PROJECTNAME=basename `pwd`
 
 build: preprocess
 	swift build -v $(SWIFT_BUILD_FLAGS)
@@ -33,9 +34,9 @@ pamphlet:
 
 xcode: pamphlet preprocess
 	swift package generate-xcodeproj
-	meta/addBuildPhase PICAROONTEMPLATE.xcodeproj/project.pbxproj "PICAROONTEMPLATE::PICAROONTEMPLATE" 'export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$$PATH; cd $${SRCROOT}; ./meta/CombinedBuildPhases.sh'
+	meta/addBuildPhase $PROJECTNAME.xcodeproj/project.pbxproj "$PROJECTNAME::$PROJECTNAME" 'export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$$PATH; cd $${SRCROOT}; ./meta/CombinedBuildPhases.sh'
 	sleep 2
-	open PICAROONTEMPLATE.xcodeproj
+	open $PROJECTNAME.xcodeproj
 
 docker:
 	-DOCKER_HOST=tcp://192.168.1.209:2376 docker buildx create --name cluster --platform linux/arm64/v8 --append
