@@ -3,9 +3,11 @@ SWIFT_BUILD_FLAGS=--configuration release
 build: preprocess
 	swift build -v $(SWIFT_BUILD_FLAGS)
 
-setup:
+setup: clean setup update xcode
+
+setupInternal: 
 	./meta/SetupTemplateProject.sh
-	#rm -f ./meta/SetupTemplateProject.sh
+	rm -f ./meta/SetupTemplateProject.sh
 
 preprocess:
 	./meta/CombinedBuildPhases.sh
