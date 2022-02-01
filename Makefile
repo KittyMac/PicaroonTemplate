@@ -5,7 +5,7 @@ build: preprocess
 
 setup:
 	./meta/SetupTemplateProject.sh
-	rm -f ./meta/SetupTemplateProject.sh
+	#rm -f ./meta/SetupTemplateProject.sh
 
 preprocess:
 	./meta/CombinedBuildPhases.sh
