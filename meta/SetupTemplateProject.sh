@@ -16,56 +16,89 @@ old2="$(tr [A-Z] [a-z] <<< "$old")"
 echo "Changing $old to $new..."
 
 shouldProcessPath () {
+        
 	# do not allow changing of this script
-	if [[ $file == *SetupTemplateProject.sh* ]]
+	if [[ "$1" == *SetupTemplateProject.sh* ]]
 	then
-		#echo "Ignoring $file"
+		#echo "Ignoring $1"
 	  	return 0
 	fi
 	
-	# do not allow changing of anything in .git
-	if [[ $file == *.build* ]]
-	then
-		#echo "Ignoring $file"
-	  	return 0
-	fi
-    
 	# do not allow changing of anything in .build
-	if [[ $file == *.git* ]]
+	if [[ "$1" == *.build* ]]
 	then
-		#echo "Ignoring $file"
+		#echo "Ignoring $1"
 	  	return 0
 	fi
     
-    return 1
+	# do not allow changing of anything in .git
+	if [[ "$1" == *.git* ]]
+	then
+		#echo "Ignoring $1"
+	  	return 0
+	fi
+    
+	# do not allow changing of anything that starts with .
+	if [[ `basename "$1"` == .* ]]
+	then
+		#echo "Ignoring $1"
+	  	return 0
+	fi
+    
+    if [[ -d "$1" ]]
+    then
+        return 1
+    fi
+    
+    # Only allow files with the following extensions
+	# do not allow changing of anything that starts with .
+	if [[ 
+        `basename "$1"` == *.html || 
+        `basename "$1"` == *.swift ||
+        `basename "$1"` == *.js ||
+        `basename "$1"` == *.json ||
+        `basename "$1"` == *.md ||
+        `basename "$1"` == *.resolved ||
+        `basename "$1"` == *.sh
+    ]]
+	then
+	  	return 1
+	fi
+    
+	if [[ `basename "$1"` == "Makefile"]]
+	then
+	  	return 1
+	fi
+    
+    return 0
 }
 
 # run through all directories, change them first
-find . -type d -print 2>/dev/null | while read file
+# process the longest (deepest) directories first
+
+find . -type d -print | awk '{print length($0), $0}' | sort -n -r | awk '{print $2}' 2>/dev/null | while read file
 do
-	if [[ shouldProcessPath == 0 ]]
-    then
+	if shouldProcessPath "$file"; then
         continue
     fi
-	
+    
 	# Rename the directory itself
-	if [[ $file == *$old* ]]
+	if [[ `basename "$file"` == *$old* ]]
 	then
 		newName=`echo $file | sed "s/$old/$new/g"`
 		echo "Renaming directory $file to $newName"
-		#mv "$file" "$newName"
+		mv "$file" "$newName"
 	fi
 done
 
 find . -type f -print0 | xargs -0 file | cut -f1 -d: 2>/dev/null | while read file
 do
-	if [[ shouldProcessPath == 0 ]]
-    then
+	if shouldProcessPath "$file"; then
         continue
     fi
     
 	newName=`echo $file | sed "s/$old/$new/g"`
 	echo "Renaming $file to $newName"
-	#mv "$file" "$newName"
-	#sed -i "" -e "s/$old/$new/g" -e "s/$old2/$new2/g" "$newName"
+	mv "$file" "$newName"
+	sed -i "" -e "s/$old/$new/g" -e "s/$old2/$new2/g" "$newName"
 done
