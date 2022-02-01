@@ -65,7 +65,7 @@ shouldProcessPath () {
 	  	return 1
 	fi
     
-	if [[ `basename "$1"` == "Makefile"]]
+	if [[ "$1" == *Makefile* ]]
 	then
 	  	return 1
 	fi
