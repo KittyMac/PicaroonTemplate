@@ -1,5 +1,5 @@
 SWIFT_BUILD_FLAGS=--configuration release
-PROJECTNAME=basename `pwd`
+PROJECTNAME := $(shell basename `pwd`)
 
 build: preprocess
 	swift build -v $(SWIFT_BUILD_FLAGS)
