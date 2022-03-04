@@ -13,3 +13,4 @@ final class PICAROONTEMPLATETests: UnitTestsBase {
         ("testPICAROONTEMPLATE", testPICAROONTEMPLATE)
     ]
 }
+

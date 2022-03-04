@@ -13,9 +13,6 @@ setup-internal:
 preprocess:
 	./meta/CombinedBuildPhases.sh
 
-figurehead:
-	mate ./.build/checkouts/Figurehead/Resources/
-
 update:
 	mkdir -p ./Sources/Pamphlet
 	swift package update

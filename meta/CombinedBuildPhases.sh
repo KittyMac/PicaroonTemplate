@@ -10,6 +10,8 @@ if [ "$(uname)" == "Darwin" ]; then
     
     killall PICAROONTEMPLATE || true
     
+    ./CopyDependencyResources.sh
+    
     time ./pamphlet --collapse ../Resources/ ../Sources/Pamphlet/
     
     # FlynnLint - Confirms all Flynn code is concurrently safe
