@@ -1,7 +1,7 @@
 import XCTest
 
-import ScrapeServerTests
+import PICAROONTEMPLATETests
 
 var tests = [XCTestCaseEntry]()
-tests += ScrapeServerTests.allTests()
+tests += PICAROONTEMPLATETests.allTests()
 XCTMain(tests)

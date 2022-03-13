@@ -10,7 +10,8 @@ let cacheMaxAge = 5
 let cacheMaxAge = 3600
 #endif
 
-func handleStaticRequest(_ httpRequest: HttpRequest) -> HttpResponse? {
+func handleStaticRequest(config: ServerConfig,
+                         httpRequest: HttpRequest) -> HttpResponse? {
     if let url = httpRequest.url {
 
         if url.contains("private/") {

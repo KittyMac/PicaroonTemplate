@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/KittyMac/Figurehead.git",
         "state": {
           "branch": "main",
-          "revision": "0795fae77f550b2202ca4da66748059e56d1b059",
+          "revision": "77a3961e1aa8cd1388a8fd04ce482f9732f675b8",
           "version": null
         }
       },
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/KittyMac/Hitch.git",
         "state": {
           "branch": null,
-          "revision": "1f7a37b10af1e185513049ab66e128a997f05856",
-          "version": "0.4.18"
+          "revision": "7a1ba421cf7bfc3fad4f5ac7e8ff5a74956537de",
+          "version": "0.4.23"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/KittyMac/Picaroon.git",
         "state": {
           "branch": null,
-          "revision": "5236b4f0dd7ca8e55872b39870343e20ab40e4e2",
-          "version": "0.3.4"
+          "revision": "5d48f42fa2e4b5e10eccea913bfa9bbae3a19482",
+          "version": "0.3.22"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/KittyMac/Sextant.git",
         "state": {
           "branch": null,
-          "revision": "73eab9e30c5eee8eb88672a26a9882910fcf80e0",
-          "version": "0.4.7"
+          "revision": "58c6c0ca016ee743ecc69840b526a3715b145cd7",
+          "version": "0.4.9"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/KittyMac/Spanker.git",
         "state": {
           "branch": null,
-          "revision": "ee2cf47aef376a8a50e79e1d4c4f9993f1fdf6dd",
-          "version": "0.2.6"
+          "revision": "0246821cae9667d8b93bd1ac71b60c23a4d77d79",
+          "version": "0.2.18"
         }
       },
       {

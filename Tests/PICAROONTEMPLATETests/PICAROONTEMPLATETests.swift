@@ -3,7 +3,7 @@ import Flynn
 
 @testable import PICAROONTEMPLATE
 
-final class PICAROONTEMPLATETests: UnitTestsBase {
+final class PICAROONTEMPLATETests: XCTestCase {
 
     func testPICAROONTEMPLATE() {
 
@@ -13,4 +13,3 @@ final class PICAROONTEMPLATETests: UnitTestsBase {
         ("testPICAROONTEMPLATE", testPICAROONTEMPLATE)
     ]
 }
-

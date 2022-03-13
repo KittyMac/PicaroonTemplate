@@ -11,7 +11,7 @@ struct QueryRequest: Codable {
 }
 
 public class WebUserSession: UserSession {
-    
+
     public required init() {
         super.init()
         unsafePriority = 99
